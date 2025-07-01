@@ -1,30 +1,30 @@
 import React from 'react';
 import Icon from '../../../components/AppIcon';
 
-
 const AppPreferencesSection = ({ preferences, onUpdate }) => {
   const handlePreferenceChange = (key, value) => {
-    onUpdate && onUpdate({
-      ...preferences,
-      [key]: value
-    });
+    onUpdate &&
+      onUpdate({
+        ...preferences,
+        [key]: value,
+      });
   };
 
   const themeOptions = [
     { value: 'light', label: 'Light', icon: 'Sun' },
     { value: 'dark', label: 'Dark', icon: 'Moon' },
-    { value: 'system', label: 'System', icon: 'Monitor' }
+    { value: 'system', label: 'System', icon: 'Monitor' },
   ];
 
   const dateFormatOptions = [
     { value: 'MM/DD/YYYY', label: 'MM/DD/YYYY (US)' },
     { value: 'DD/MM/YYYY', label: 'DD/MM/YYYY (EU)' },
-    { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD (ISO)' }
+    { value: 'YYYY-MM-DD', label: 'YYYY-MM-DD (ISO)' },
   ];
 
   const timeFormatOptions = [
     { value: '12', label: '12-hour (AM/PM)' },
-    { value: '24', label: '24-hour' }
+    { value: '24', label: '24-hour' },
   ];
 
   return (
@@ -47,18 +47,27 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
                 onClick={() => handlePreferenceChange('theme', theme.value)}
                 className={`p-4 rounded-lg border-2 transition-micro hover-lift ${
                   preferences.theme === theme.value
-                    ? 'border-primary bg-blue-50' :'border-border bg-background hover:border-border-light'
+                    ? 'border-primary bg-blue-50'
+                    : 'border-border bg-background hover:border-border-light'
                 }`}
               >
                 <div className="flex flex-col items-center space-y-2">
-                  <Icon 
-                    name={theme.icon} 
-                    size={24} 
-                    className={preferences.theme === theme.value ? 'text-primary' : 'text-text-secondary'}
+                  <Icon
+                    name={theme.icon}
+                    size={24}
+                    className={
+                      preferences.theme === theme.value
+                        ? 'text-primary'
+                        : 'text-text-secondary'
+                    }
                   />
-                  <span className={`text-sm font-medium ${
-                    preferences.theme === theme.value ? 'text-primary' : 'text-text-primary'
-                  }`}>
+                  <span
+                    className={`text-sm font-medium ${
+                      preferences.theme === theme.value
+                        ? 'text-primary'
+                        : 'text-text-primary'
+                    }`}
+                  >
                     {theme.label}
                   </span>
                 </div>
@@ -69,19 +78,28 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
 
         {/* Date Format */}
         <div>
-          <h3 className="text-md font-medium text-text-primary mb-4">Date Format</h3>
+          <h3 className="text-md font-medium text-text-primary mb-4">
+            Date Format
+          </h3>
           <div className="space-y-2">
             {dateFormatOptions.map((format) => (
-              <label key={format.value} className="flex items-center space-x-3 cursor-pointer">
+              <label
+                key={format.value}
+                className="flex items-center space-x-3 cursor-pointer"
+              >
                 <input
                   type="radio"
                   name="dateFormat"
                   value={format.value}
                   checked={preferences.dateFormat === format.value}
-                  onChange={(e) => handlePreferenceChange('dateFormat', e.target.value)}
+                  onChange={(e) =>
+                    handlePreferenceChange('dateFormat', e.target.value)
+                  }
                   className="w-4 h-4 text-primary border-border focus:ring-primary"
                 />
-                <span className="text-sm text-text-primary">{format.label}</span>
+                <span className="text-sm text-text-primary">
+                  {format.label}
+                </span>
               </label>
             ))}
           </div>
@@ -89,19 +107,28 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
 
         {/* Time Format */}
         <div>
-          <h3 className="text-md font-medium text-text-primary mb-4">Time Format</h3>
+          <h3 className="text-md font-medium text-text-primary mb-4">
+            Time Format
+          </h3>
           <div className="space-y-2">
             {timeFormatOptions.map((format) => (
-              <label key={format.value} className="flex items-center space-x-3 cursor-pointer">
+              <label
+                key={format.value}
+                className="flex items-center space-x-3 cursor-pointer"
+              >
                 <input
                   type="radio"
                   name="timeFormat"
                   value={format.value}
                   checked={preferences.timeFormat === format.value}
-                  onChange={(e) => handlePreferenceChange('timeFormat', e.target.value)}
+                  onChange={(e) =>
+                    handlePreferenceChange('timeFormat', e.target.value)
+                  }
                   className="w-4 h-4 text-primary border-border focus:ring-primary"
                 />
-                <span className="text-sm text-text-primary">{format.label}</span>
+                <span className="text-sm text-text-primary">
+                  {format.label}
+                </span>
               </label>
             ))}
           </div>
@@ -109,7 +136,9 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
 
         {/* Language Preference */}
         <div>
-          <h3 className="text-md font-medium text-text-primary mb-4">Language</h3>
+          <h3 className="text-md font-medium text-text-primary mb-4">
+            Language
+          </h3>
           <select
             value={preferences.language}
             onChange={(e) => handlePreferenceChange('language', e.target.value)}
@@ -128,13 +157,17 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
         <div>
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-md font-medium text-text-primary">Auto-save Tasks</h3>
+              <h3 className="text-md font-medium text-text-primary">
+                Auto-save Tasks
+              </h3>
               <p className="text-sm text-text-secondary mt-1">
                 Automatically save task changes as you type
               </p>
             </div>
             <button
-              onClick={() => handlePreferenceChange('autoSave', !preferences.autoSave)}
+              onClick={() =>
+                handlePreferenceChange('autoSave', !preferences.autoSave)
+              }
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                 preferences.autoSave ? 'bg-primary' : 'bg-border'
               }`}
