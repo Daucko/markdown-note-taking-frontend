@@ -1,5 +1,16 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+} from 'recharts';
 
 const NotesChart = () => {
   // Mock data for charts
@@ -10,14 +21,14 @@ const NotesChart = () => {
     { name: 'Thu', notes: 8 },
     { name: 'Fri', notes: 6 },
     { name: 'Sat', notes: 4 },
-    { name: 'Sun', notes: 1 }
+    { name: 'Sun', notes: 1 },
   ];
 
   const tagData = [
     { name: 'Work', value: 12, color: '#3B82F6' },
     { name: 'Personal', value: 8, color: '#10B981' },
     { name: 'Ideas', value: 5, color: '#F59E0B' },
-    { name: 'Learning', value: 3, color: '#EF4444' }
+    { name: 'Learning', value: 3, color: '#EF4444' },
   ];
 
   return (
@@ -36,12 +47,12 @@ const NotesChart = () => {
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={creationData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                <XAxis 
-                  dataKey="name" 
+                <XAxis
+                  dataKey="name"
                   tick={{ fontSize: 12, fill: '#6B7280' }}
                   axisLine={{ stroke: '#E5E7EB' }}
                 />
-                <YAxis 
+                <YAxis
                   tick={{ fontSize: 12, fill: '#6B7280' }}
                   axisLine={{ stroke: '#E5E7EB' }}
                 />
@@ -50,7 +61,7 @@ const NotesChart = () => {
                     backgroundColor: '#FFFFFF',
                     border: '1px solid #E5E7EB',
                     borderRadius: '8px',
-                    fontSize: '12px'
+                    fontSize: '12px',
                   }}
                 />
                 <Bar dataKey="notes" fill="#3B82F6" radius={[4, 4, 0, 0]} />
@@ -85,13 +96,13 @@ const NotesChart = () => {
                     backgroundColor: '#FFFFFF',
                     border: '1px solid #E5E7EB',
                     borderRadius: '8px',
-                    fontSize: '12px'
+                    fontSize: '12px',
                   }}
                 />
               </PieChart>
             </ResponsiveContainer>
           </div>
-          
+
           {/* Legend */}
           <div className="grid grid-cols-2 gap-2 mt-4">
             {tagData?.map((item, index) => (
