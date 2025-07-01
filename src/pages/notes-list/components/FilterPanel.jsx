@@ -3,36 +3,42 @@ import Button from '../../../components/ui/Button';
 import Icon from '../../../components/AppIcon';
 
 const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
-  const [localFilters, setLocalFilters] = useState(filters || {
-    tags: [],
-    dateRange: null,
-    favorites: false
-  });
-
-  useEffect(() => {
-    setLocalFilters(filters || {
+  const [localFilters, setLocalFilters] = useState(
+    filters || {
       tags: [],
       dateRange: null,
-      favorites: false
-    });
+      favorites: false,
+    }
+  );
+
+  useEffect(() => {
+    setLocalFilters(
+      filters || {
+        tags: [],
+        dateRange: null,
+        favorites: false,
+      }
+    );
   }, [filters]);
 
   // Get unique tags from notes
-  const tags = [...new Set(notes?.flatMap(note => note?.tags || []).filter(Boolean))];
+  const tags = [
+    ...new Set(notes?.flatMap((note) => note?.tags || []).filter(Boolean)),
+  ];
 
   const handleTagToggle = (tag) => {
-    setLocalFilters(prev => ({
+    setLocalFilters((prev) => ({
       ...prev,
       tags: prev?.tags?.includes(tag)
-        ? prev?.tags?.filter(t => t !== tag)
-        : [...(prev?.tags || []), tag]
+        ? prev?.tags?.filter((t) => t !== tag)
+        : [...(prev?.tags || []), tag],
     }));
   };
 
   const handleFavoritesToggle = () => {
-    setLocalFilters(prev => ({
+    setLocalFilters((prev) => ({
       ...prev,
-      favorites: !prev?.favorites
+      favorites: !prev?.favorites,
     }));
   };
 
@@ -44,14 +50,14 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
     const resetFilters = {
       tags: [],
       dateRange: null,
-      favorites: false
+      favorites: false,
     };
     setLocalFilters(resetFilters);
     onApply?.(resetFilters);
   };
 
-  const hasActiveFilters = 
-    localFilters?.tags?.length > 0 || 
+  const hasActiveFilters =
+    localFilters?.tags?.length > 0 ||
     localFilters?.favorites ||
     localFilters?.dateRange;
 
@@ -103,7 +109,12 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
                 <span className="ml-2 text-sm text-text-secondary">
                   {tag}
                   <span className="ml-1 text-xs text-text-secondary">
-                    ({notes?.filter(note => (note?.tags || []).includes(tag))?.length})
+                    (
+                    {
+                      notes?.filter((note) => (note?.tags || []).includes(tag))
+                        ?.length
+                    }
+                    )
                   </span>
                 </span>
               </label>
@@ -113,7 +124,9 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
 
         {/* Favorites */}
         <div>
-          <h4 className="text-sm font-medium text-text-primary mb-3">Favorites</h4>
+          <h4 className="text-sm font-medium text-text-primary mb-3">
+            Favorites
+          </h4>
           <label className="flex items-center">
             <input
               type="checkbox"
@@ -124,7 +137,7 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
             <span className="ml-2 text-sm text-text-secondary">
               Show only favorites
               <span className="ml-1 text-xs text-text-secondary">
-                ({notes?.filter(note => note?.isFavorite)?.length})
+                ({notes?.filter((note) => note?.isFavorite)?.length})
               </span>
             </span>
           </label>
@@ -132,13 +145,17 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
 
         {/* Date Range */}
         <div>
-          <h4 className="text-sm font-medium text-text-primary mb-3">Date Range</h4>
+          <h4 className="text-sm font-medium text-text-primary mb-3">
+            Date Range
+          </h4>
           <select
             value={localFilters?.dateRange || ''}
-            onChange={(e) => setLocalFilters(prev => ({
-              ...prev,
-              dateRange: e.target.value || null
-            }))}
+            onChange={(e) =>
+              setLocalFilters((prev) => ({
+                ...prev,
+                dateRange: e.target.value || null,
+              }))
+            }
             className="w-full px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
           >
             <option value="">All time</option>
@@ -160,11 +177,7 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
         >
           Reset
         </Button>
-        <Button
-          variant="primary"
-          onClick={handleApply}
-          className="flex-1"
-        >
+        <Button variant="primary" onClick={handleApply} className="flex-1">
           Apply Filters
         </Button>
       </div>
