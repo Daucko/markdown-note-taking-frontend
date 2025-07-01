@@ -10,11 +10,11 @@ const SortDropdown = ({ currentSort, onSortChange }) => {
     { value: 'dueDate', label: 'Due Date', icon: 'Calendar' },
     { value: 'createdAt', label: 'Created Date', icon: 'Clock' },
     { value: 'title', label: 'Alphabetical', icon: 'AlphabeticalSort' },
-    { value: 'status', label: 'Status', icon: 'CheckCircle' }
+    { value: 'status', label: 'Status', icon: 'CheckCircle' },
   ];
 
   const getCurrentSortLabel = () => {
-    const option = sortOptions.find(opt => opt.value === currentSort.field);
+    const option = sortOptions.find((opt) => opt.value === currentSort.field);
     return option ? option.label : 'Sort by';
   };
 
@@ -30,7 +30,10 @@ const SortDropdown = ({ currentSort, onSortChange }) => {
   }, []);
 
   const handleSortSelect = (field) => {
-    const newDirection = currentSort.field === field && currentSort.direction === 'asc' ? 'desc' : 'asc';
+    const newDirection =
+      currentSort.field === field && currentSort.direction === 'asc'
+        ? 'desc'
+        : 'asc';
     onSortChange({ field, direction: newDirection });
     setIsOpen(false);
   };
@@ -44,9 +47,9 @@ const SortDropdown = ({ currentSort, onSortChange }) => {
       >
         <Icon name="ArrowUpDown" size={16} />
         <span className="hidden sm:inline">{getCurrentSortLabel()}</span>
-        <Icon 
-          name="ChevronDown" 
-          size={16} 
+        <Icon
+          name="ChevronDown"
+          size={16}
           className={`transition-transform ${isOpen ? 'rotate-180' : ''}`}
         />
       </Button>
@@ -69,9 +72,13 @@ const SortDropdown = ({ currentSort, onSortChange }) => {
                     <span>{option.label}</span>
                   </div>
                   {isActive && (
-                    <Icon 
-                      name={currentSort.direction === 'asc' ? 'ArrowUp' : 'ArrowDown'} 
-                      size={14} 
+                    <Icon
+                      name={
+                        currentSort.direction === 'asc'
+                          ? 'ArrowUp'
+                          : 'ArrowDown'
+                      }
+                      size={14}
                     />
                   )}
                 </button>
