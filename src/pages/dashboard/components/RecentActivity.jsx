@@ -10,7 +10,7 @@ const RecentActivity = () => {
       description: 'Task marked as completed',
       timestamp: '2 hours ago',
       icon: 'CheckCircle',
-      color: 'text-green-600'
+      color: 'text-green-600',
     },
     {
       id: 2,
@@ -19,7 +19,7 @@ const RecentActivity = () => {
       description: 'New task created',
       timestamp: '4 hours ago',
       icon: 'Plus',
-      color: 'text-blue-600'
+      color: 'text-blue-600',
     },
     {
       id: 3,
@@ -28,7 +28,7 @@ const RecentActivity = () => {
       description: 'Tag changed to High',
       timestamp: '6 hours ago',
       icon: 'Edit',
-      color: 'text-amber-600'
+      color: 'text-amber-600',
     },
     {
       id: 4,
@@ -37,7 +37,7 @@ const RecentActivity = () => {
       description: 'Task is now overdue',
       timestamp: '1 day ago',
       icon: 'AlertCircle',
-      color: 'text-red-600'
+      color: 'text-red-600',
     },
     {
       id: 5,
@@ -46,8 +46,8 @@ const RecentActivity = () => {
       description: 'Task marked as completed',
       timestamp: '2 days ago',
       icon: 'CheckCircle',
-      color: 'text-green-600'
-    }
+      color: 'text-green-600',
+    },
   ];
 
   return (
@@ -58,7 +58,9 @@ const RecentActivity = () => {
       <div className="space-y-4">
         {activities.map((activity) => (
           <div key={activity.id} className="flex items-start space-x-3">
-            <div className={`w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 ${activity.color}`}>
+            <div
+              className={`w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0 ${activity.color}`}
+            >
               <Icon name={activity.icon} size={16} strokeWidth={2} />
             </div>
             <div className="flex-1 min-w-0">
