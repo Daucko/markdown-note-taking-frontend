@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
 import Icon from '../../../components/AppIcon';
 
-const NoteCard = ({ 
-  note, 
-  isSelected = false, 
-  isSelectionMode = false, 
-  onLongPress, 
-  onSelect 
+const NoteCard = ({
+  note,
+  isSelected = false,
+  isSelectionMode = false,
+  onLongPress,
+  onSelect,
 }) => {
   const navigate = useNavigate();
 
@@ -16,12 +16,12 @@ const NoteCard = ({
     if (isSelectionMode) {
       onSelect?.();
     } else {
-      navigate('/task-detail-edit', { 
-        state: { 
-          mode: 'edit', 
+      navigate('/task-detail-edit', {
+        state: {
+          mode: 'edit',
           type: 'note',
-          noteId: note?.id 
-        } 
+          noteId: note?.id,
+        },
       });
     }
   };
@@ -51,8 +51,8 @@ const NoteCard = ({
       onClick={handleClick}
       onTouchStart={handleLongPress}
       className={`bg-surface border rounded-lg p-4 cursor-pointer transition-all hover-lift ${
-        isSelected 
-          ? 'border-primary bg-primary-light shadow-elevation-1' 
+        isSelected
+          ? 'border-primary bg-primary-light shadow-elevation-1'
           : 'border-border hover:border-primary-light'
       } ${isSelectionMode ? 'select-none' : ''}`}
     >
@@ -69,27 +69,29 @@ const NoteCard = ({
 
         <div className="flex items-center space-x-2 ml-2">
           {isSelectionMode && (
-            <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-              isSelected 
-                ? 'bg-primary border-primary' :'border-border'
-            }`}>
+            <div
+              className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                isSelected ? 'bg-primary border-primary' : 'border-border'
+              }`}
+            >
               {isSelected && (
                 <Icon name="Check" size={12} color="white" strokeWidth={3} />
               )}
             </div>
           )}
-          
+
           {!isSelectionMode && (
             <button
               onClick={handleFavoriteClick}
               className={`p-1 rounded-full transition-colors ${
-                note?.isFavorite 
-                  ? 'text-red-500 hover:text-red-600' :'text-text-secondary hover:text-red-500'
+                note?.isFavorite
+                  ? 'text-red-500 hover:text-red-600'
+                  : 'text-text-secondary hover:text-red-500'
               }`}
             >
-              <Icon 
-                name="Heart" 
-                size={16} 
+              <Icon
+                name="Heart"
+                size={16}
                 fill={note?.isFavorite ? 'currentColor' : 'none'}
               />
             </button>
@@ -100,7 +102,8 @@ const NoteCard = ({
       {/* Content Preview */}
       <div className="mb-3">
         <p className="text-sm text-text-secondary line-clamp-3">
-          {note?.preview || note?.content?.replace(/[#*`]/g, '').substring(0, 150)}
+          {note?.preview ||
+            note?.content?.replace(/[#*`]/g, '').substring(0, 150)}
         </p>
       </div>
 
