@@ -2,16 +2,15 @@ import React from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
-const TaskCard = ({ 
-  task, 
-  onToggleComplete, 
-  onEdit, 
-  onDelete, 
-  isSelected, 
-  onSelect, 
-  isBulkMode 
+const TaskCard = ({
+  task,
+  onToggleComplete,
+  onEdit,
+  onDelete,
+  isSelected,
+  onSelect,
+  isBulkMode,
 }) => {
-
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case 'completed':
@@ -30,7 +29,7 @@ const TaskCard = ({
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     });
   };
 
@@ -41,9 +40,11 @@ const TaskCard = ({
   };
 
   return (
-    <div className={`bg-surface border border-border rounded-lg p-4 transition-micro hover-lift ${
-      isSelected ? 'ring-2 ring-primary border-primary' : ''
-    }`}>
+    <div
+      className={`bg-surface border border-border rounded-lg p-4 transition-micro hover-lift ${
+        isSelected ? 'ring-2 ring-primary border-primary' : ''
+      }`}
+    >
       <div className="flex items-start justify-between">
         <div className="flex items-start space-x-3 flex-1">
           {/* Checkbox for bulk selection */}
@@ -52,10 +53,10 @@ const TaskCard = ({
               onClick={() => onSelect(task.id)}
               className="mt-1 p-1 rounded hover:bg-border-light transition-micro"
             >
-              <Icon 
-                name={isSelected ? "CheckSquare" : "Square"} 
-                size={18} 
-                className={isSelected ? "text-primary" : "text-text-secondary"}
+              <Icon
+                name={isSelected ? 'CheckSquare' : 'Square'}
+                size={18}
+                className={isSelected ? 'text-primary' : 'text-text-secondary'}
               />
             </button>
           )}
@@ -65,21 +66,27 @@ const TaskCard = ({
             onClick={() => onToggleComplete(task.id)}
             className="mt-1 p-1 rounded hover:bg-border-light transition-micro"
           >
-            <Icon 
-              name={task.status === 'completed' ? "CheckCircle2" : "Circle"} 
-              size={18} 
-              className={task.status === 'completed' ? "text-success" : "text-text-secondary"}
+            <Icon
+              name={task.status === 'completed' ? 'CheckCircle2' : 'Circle'}
+              size={18}
+              className={
+                task.status === 'completed'
+                  ? 'text-success'
+                  : 'text-text-secondary'
+              }
             />
           </button>
 
           {/* Task content */}
           <div className="flex-1 min-w-0">
-            <h3 className={`font-medium text-text-primary mb-1 ${
-              task.status === 'completed' ? 'line-through opacity-60' : ''
-            }`}>
+            <h3
+              className={`font-medium text-text-primary mb-1 ${
+                task.status === 'completed' ? 'line-through opacity-60' : ''
+              }`}
+            >
               {task.title}
             </h3>
-            
+
             {task.description && (
               <p className="text-sm text-text-secondary mb-2 line-clamp-2">
                 {task.description}
@@ -89,9 +96,11 @@ const TaskCard = ({
             {/* Task metadata */}
             <div className="flex items-center flex-wrap gap-2 text-xs">
               {/* Due date */}
-              <div className={`flex items-center space-x-1 ${
-                isOverdue() ? 'text-error' : 'text-text-secondary'
-              }`}>
+              <div
+                className={`flex items-center space-x-1 ${
+                  isOverdue() ? 'text-error' : 'text-text-secondary'
+                }`}
+              >
                 <Icon name="Calendar" size={12} />
                 <span>{formatDate(task.dueDate)}</span>
               </div>
@@ -104,11 +113,20 @@ const TaskCard = ({
               )}
 
               {/* Status indicator */}
-              <div className={`flex items-center space-x-1 ${getStatusColor(task.status)}`}>
-                <div className={`w-2 h-2 rounded-full ${
-                  task.status === 'completed' ? 'bg-success' :
-                  isOverdue() ? 'bg-error' : 'bg-warning'
-                }`} />
+              <div
+                className={`flex items-center space-x-1 ${getStatusColor(
+                  task.status
+                )}`}
+              >
+                <div
+                  className={`w-2 h-2 rounded-full ${
+                    task.status === 'completed'
+                      ? 'bg-success'
+                      : isOverdue()
+                      ? 'bg-error'
+                      : 'bg-warning'
+                  }`}
+                />
                 <span className="capitalize">{task.status}</span>
               </div>
             </div>
