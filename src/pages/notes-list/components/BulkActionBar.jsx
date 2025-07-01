@@ -11,8 +11,8 @@ const BulkActionBar = ({ selectedCount, onAction, onCancel }) => {
       variant: 'outline'
     },
     {
-      id: 'category',
-      label: 'Category',
+      id: 'tag',
+      label: 'Tag',
       icon: 'Tag',
       variant: 'outline'
     },

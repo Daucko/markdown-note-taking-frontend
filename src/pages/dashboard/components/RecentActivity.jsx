@@ -25,7 +25,7 @@ const RecentActivity = () => {
       id: 3,
       type: 'task_updated',
       title: 'Database optimization',
-      description: 'Priority changed to High',
+      description: 'Tag changed to High',
       timestamp: '6 hours ago',
       icon: 'Edit',
       color: 'text-amber-600'

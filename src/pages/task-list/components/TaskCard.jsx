@@ -105,10 +105,10 @@ const TaskCard = ({
                 <span>{formatDate(task.dueDate)}</span>
               </div>
 
-              {/* Category tag */}
-              {task.category && (
+              {/* Tag badge */}
+              {task.tag && (
                 <span className="px-2 py-1 bg-border-light text-text-secondary rounded-full text-xs">
-                  {task.category}
+                  {task.tag}
                 </span>
               )}
 

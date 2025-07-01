@@ -4,28 +4,28 @@ import Icon from '../../../components/AppIcon';
 
 const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
   const [localFilters, setLocalFilters] = useState(filters || {
-    categories: [],
+    tags: [],
     dateRange: null,
     favorites: false
   });
 
   useEffect(() => {
     setLocalFilters(filters || {
-      categories: [],
+      tags: [],
       dateRange: null,
       favorites: false
     });
   }, [filters]);
 
-  // Get unique categories from notes
-  const categories = [...new Set(notes?.map(note => note?.category).filter(Boolean))];
+  // Get unique tags from notes
+  const tags = [...new Set(notes?.flatMap(note => note?.tags || []).filter(Boolean))];
 
-  const handleCategoryToggle = (category) => {
+  const handleTagToggle = (tag) => {
     setLocalFilters(prev => ({
       ...prev,
-      categories: prev?.categories?.includes(category)
-        ? prev?.categories?.filter(c => c !== category)
-        : [...(prev?.categories || []), category]
+      tags: prev?.tags?.includes(tag)
+        ? prev?.tags?.filter(t => t !== tag)
+        : [...(prev?.tags || []), tag]
     }));
   };
 
@@ -42,7 +42,7 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
 
   const handleReset = () => {
     const resetFilters = {
-      categories: [],
+      tags: [],
       dateRange: null,
       favorites: false
     };
@@ -51,7 +51,7 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
   };
 
   const hasActiveFilters = 
-    localFilters?.categories?.length > 0 || 
+    localFilters?.tags?.length > 0 || 
     localFilters?.favorites ||
     localFilters?.dateRange;
 
@@ -88,22 +88,22 @@ const FilterPanel = ({ filters, onApply, onClose, notes = [] }) => {
       </div>
 
       <div className="space-y-6">
-        {/* Categories */}
+        {/* Tags */}
         <div>
-          <h4 className="text-sm font-medium text-text-primary mb-3">Categories</h4>
+          <h4 className="text-sm font-medium text-text-primary mb-3">Tags</h4>
           <div className="space-y-2">
-            {categories?.map((category) => (
-              <label key={category} className="flex items-center">
+            {tags?.map((tag) => (
+              <label key={tag} className="flex items-center">
                 <input
                   type="checkbox"
-                  checked={localFilters?.categories?.includes(category)}
-                  onChange={() => handleCategoryToggle(category)}
+                  checked={localFilters?.tags?.includes(tag)}
+                  onChange={() => handleTagToggle(tag)}
                   className="rounded border-border text-primary focus:ring-primary focus:ring-offset-0"
                 />
                 <span className="ml-2 text-sm text-text-secondary">
-                  {category}
+                  {tag}
                   <span className="ml-1 text-xs text-text-secondary">
-                    ({notes?.filter(note => note?.category === category)?.length})
+                    ({notes?.filter(note => (note?.tags || []).includes(tag))?.length})
                   </span>
                 </span>
               </label>

@@ -11,48 +11,31 @@ const UpcomingTasks = () => {
       id: 1,
       title: 'Client presentation preparation',
       dueDate: '2024-12-20',
-      priority: 'high',
-      category: 'Work',
+      tag: 'Work',
       progress: 75
     },
     {
       id: 2,
       title: 'Website deployment checklist',
       dueDate: '2024-12-21',
-      priority: 'medium',
-      category: 'Development',
+      tag: 'Development',
       progress: 40
     },
     {
       id: 3,
       title: 'Team meeting agenda',
       dueDate: '2024-12-22',
-      priority: 'low',
-      category: 'Management',
+      tag: 'Management',
       progress: 20
     },
     {
       id: 4,
       title: 'Database backup verification',
       dueDate: '2024-12-23',
-      priority: 'high',
-      category: 'Maintenance',
+      tag: 'Maintenance',
       progress: 0
     }
   ];
-
-  const getPriorityColor = (priority) => {
-    switch (priority) {
-      case 'high':
-        return 'text-red-600 bg-red-50';
-      case 'medium':
-        return 'text-amber-600 bg-amber-50';
-      case 'low':
-        return 'text-green-600 bg-green-50';
-      default:
-        return 'text-gray-600 bg-gray-50';
-    }
-  };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -102,8 +85,9 @@ const UpcomingTasks = () => {
               <h4 className="text-sm font-medium text-text-primary flex-1 pr-2">
                 {task.title}
               </h4>
-              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getPriorityColor(task.priority)}`}>
-                {task.priority}
+              {/* Tag badge */}
+              <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                {task.tag}
               </span>
             </div>
             
@@ -115,7 +99,7 @@ const UpcomingTasks = () => {
                 </div>
                 <div className="flex items-center space-x-1">
                   <Icon name="Tag" size={12} />
-                  <span>{task.category}</span>
+                  <span>{task.tag}</span>
                 </div>
               </div>
               <span>{task.progress}%</span>

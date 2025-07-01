@@ -18,22 +18,6 @@ const FilterPanel = ({
     { value: 'overdue', label: 'Overdue' },
   ];
 
-  const priorityOptions = [
-    { value: 'all', label: 'All Priorities' },
-    { value: 'high', label: 'High' },
-    { value: 'medium', label: 'Medium' },
-    { value: 'low', label: 'Low' },
-  ];
-
-  const categoryOptions = [
-    { value: 'all', label: 'All Categories' },
-    { value: 'work', label: 'Work' },
-    { value: 'personal', label: 'Personal' },
-    { value: 'shopping', label: 'Shopping' },
-    { value: 'health', label: 'Health' },
-    { value: 'education', label: 'Education' },
-  ];
-
   if (!isOpen) return null;
 
   return (
@@ -93,60 +77,6 @@ const FilterPanel = ({
                     value={option.value}
                     checked={filters.status === option.value}
                     onChange={(e) => onFilterChange('status', e.target.value)}
-                    className="w-4 h-4 text-primary border-border focus:ring-primary"
-                  />
-                  <span className="text-sm text-text-secondary">
-                    {option.label}
-                  </span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Priority Filter */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Priority
-            </label>
-            <div className="space-y-2">
-              {priorityOptions.map((option) => (
-                <label
-                  key={option.value}
-                  className="flex items-center space-x-2 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    name="priority"
-                    value={option.value}
-                    checked={filters.priority === option.value}
-                    onChange={(e) => onFilterChange('priority', e.target.value)}
-                    className="w-4 h-4 text-primary border-border focus:ring-primary"
-                  />
-                  <span className="text-sm text-text-secondary">
-                    {option.label}
-                  </span>
-                </label>
-              ))}
-            </div>
-          </div>
-
-          {/* Category Filter */}
-          <div>
-            <label className="block text-sm font-medium text-text-primary mb-2">
-              Category
-            </label>
-            <div className="space-y-2">
-              {categoryOptions.map((option) => (
-                <label
-                  key={option.value}
-                  className="flex items-center space-x-2 cursor-pointer"
-                >
-                  <input
-                    type="radio"
-                    name="category"
-                    value={option.value}
-                    checked={filters.category === option.value}
-                    onChange={(e) => onFilterChange('category', e.target.value)}
                     className="w-4 h-4 text-primary border-border focus:ring-primary"
                   />
                   <span className="text-sm text-text-secondary">

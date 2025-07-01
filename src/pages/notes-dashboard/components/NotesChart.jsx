@@ -13,7 +13,7 @@ const NotesChart = () => {
     { name: 'Sun', notes: 1 }
   ];
 
-  const categoryData = [
+  const tagData = [
     { name: 'Work', value: 12, color: '#3B82F6' },
     { name: 'Personal', value: 8, color: '#10B981' },
     { name: 'Ideas', value: 5, color: '#F59E0B' },
@@ -59,16 +59,16 @@ const NotesChart = () => {
           </div>
         </div>
 
-        {/* Category Distribution Chart */}
+        {/* Tag Distribution Chart */}
         <div>
           <h4 className="text-sm font-medium text-text-secondary mb-4">
-            Notes by Category
+            Notes by Tag
           </h4>
           <div className="h-48">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
-                  data={categoryData}
+                  data={tagData}
                   cx="50%"
                   cy="50%"
                   innerRadius={40}
@@ -76,7 +76,7 @@ const NotesChart = () => {
                   paddingAngle={2}
                   dataKey="value"
                 >
-                  {categoryData?.map((entry, index) => (
+                  {tagData?.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry?.color} />
                   ))}
                 </Pie>
@@ -94,7 +94,7 @@ const NotesChart = () => {
           
           {/* Legend */}
           <div className="grid grid-cols-2 gap-2 mt-4">
-            {categoryData?.map((item, index) => (
+            {tagData?.map((item, index) => (
               <div key={index} className="flex items-center">
                 <div
                   className="w-3 h-3 rounded-full mr-2"

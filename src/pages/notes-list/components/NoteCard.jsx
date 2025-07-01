@@ -38,21 +38,6 @@ const NoteCard = ({
     console.log('Toggle favorite for note:', note?.id);
   };
 
-  const getCategoryColor = (category) => {
-    switch (category?.toLowerCase()) {
-      case 'work':
-        return 'bg-blue-100 text-blue-800';
-      case 'personal':
-        return 'bg-green-100 text-green-800';
-      case 'ideas':
-        return 'bg-purple-100 text-purple-800';
-      case 'learning':
-        return 'bg-orange-100 text-orange-800';
-      default:
-        return 'bg-gray-100 text-gray-800';
-    }
-  };
-
   const formatDate = (dateString) => {
     try {
       return formatDistanceToNow(new Date(dateString), { addSuffix: true });
@@ -79,14 +64,6 @@ const NoteCard = ({
           </h3>
           <div className="flex items-center space-x-2 text-xs text-text-secondary">
             <span>Modified {formatDate(note?.modifiedAt)}</span>
-            {note?.category && (
-              <>
-                <span>•</span>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(note?.category)}`}>
-                  {note?.category}
-                </span>
-              </>
-            )}
           </div>
         </div>
 
