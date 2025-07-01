@@ -8,20 +8,20 @@ const BulkActionBar = ({ selectedCount, onAction, onCancel }) => {
       id: 'favorite',
       label: 'Favorite',
       icon: 'Heart',
-      variant: 'outline'
+      variant: 'outline',
     },
     {
       id: 'tag',
       label: 'Tag',
       icon: 'Tag',
-      variant: 'outline'
+      variant: 'outline',
     },
     {
       id: 'delete',
       label: 'Delete',
       icon: 'Trash2',
-      variant: 'destructive'
-    }
+      variant: 'destructive',
+    },
   ];
 
   return (
@@ -48,7 +48,9 @@ const BulkActionBar = ({ selectedCount, onAction, onCancel }) => {
               iconName={action?.icon}
               onClick={() => onAction?.(action?.id)}
               className={`${
-                action?.variant === 'destructive' ?'bg-red-600 hover:bg-red-700 text-white border-red-600' :'bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-dark'
+                action?.variant === 'destructive'
+                  ? 'bg-red-600 hover:bg-red-700 text-white border-red-600'
+                  : 'bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-dark'
               }`}
             >
               <span className="hidden sm:inline ml-2">{action?.label}</span>
