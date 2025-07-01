@@ -8,10 +8,8 @@ const TaskForm = ({ task, onSave, onCancel, mode = 'edit' }) => {
     title: '',
     description: '',
     dueDate: '',
-    priority: 'medium',
-    category: 'personal',
     status: 'pending',
-    tags: []
+    tags: [],
   });
 
   const [errors, setErrors] = useState({});
@@ -23,10 +21,8 @@ const TaskForm = ({ task, onSave, onCancel, mode = 'edit' }) => {
         title: task.title || '',
         description: task.description || '',
         dueDate: task.dueDate || '',
-        priority: task.priority || 'medium',
-        category: task.category || 'personal',
         status: task.status || 'pending',
-        tags: task.tags || []
+        tags: task.tags || [],
       });
     }
   }, [task, mode]);
@@ -48,7 +44,7 @@ const TaskForm = ({ task, onSave, onCancel, mode = 'edit' }) => {
       const selectedDate = new Date(formData.dueDate);
       const today = new Date();
       today.setHours(0, 0, 0, 0);
-      
+
       if (selectedDate < today) {
         newErrors.dueDate = 'Due date cannot be in the past';
       }
@@ -59,31 +55,31 @@ const TaskForm = ({ task, onSave, onCancel, mode = 'edit' }) => {
   };
 
   const handleInputChange = (field, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [field]: value
+      [field]: value,
     }));
 
     // Clear error when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({
+      setErrors((prev) => ({
         ...prev,
-        [field]: ''
+        [field]: '',
       }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate API call
       onSave(formData);
     } catch (error) {
       console.error('Error saving task:', error);
@@ -92,25 +88,10 @@ const TaskForm = ({ task, onSave, onCancel, mode = 'edit' }) => {
     }
   };
 
-  const priorityOptions = [
-    { value: 'low', label: 'Low', color: 'text-success', bgColor: 'bg-success/10' },
-    { value: 'medium', label: 'Medium', color: 'text-warning', bgColor: 'bg-warning/10' },
-    { value: 'high', label: 'High', color: 'text-error', bgColor: 'bg-error/10' }
-  ];
-
-  const categoryOptions = [
-    { value: 'personal', label: 'Personal' },
-    { value: 'work', label: 'Work' },
-    { value: 'shopping', label: 'Shopping' },
-    { value: 'health', label: 'Health' },
-    { value: 'finance', label: 'Finance' },
-    { value: 'education', label: 'Education' }
-  ];
-
   const statusOptions = [
     { value: 'pending', label: 'Pending' },
     { value: 'in-progress', label: 'In Progress' },
-    { value: 'completed', label: 'Completed' }
+    { value: 'completed', label: 'Completed' },
   ];
 
   return (
@@ -177,57 +158,6 @@ const TaskForm = ({ task, onSave, onCancel, mode = 'edit' }) => {
             {errors.dueDate}
           </p>
         )}
-      </div>
-
-      {/* Priority Field */}
-      <div>
-        <label className="block text-sm font-medium text-text-primary mb-2">
-          Priority
-        </label>
-        <div className="grid grid-cols-3 gap-2">
-          {priorityOptions.map((option) => (
-            <button
-              key={option.value}
-              type="button"
-              onClick={() => handleInputChange('priority', option.value)}
-              className={`p-3 rounded-md border transition-micro ${
-                formData.priority === option.value
-                  ? `${option.bgColor} border-current ${option.color}`
-                  : 'border-border hover:border-text-secondary'
-              }`}
-            >
-              <div className="flex items-center justify-center space-x-2">
-                <div className={`w-2 h-2 rounded-full ${
-                  option.value === 'low' ? 'bg-success' :
-                  option.value === 'medium' ? 'bg-warning' : 'bg-error'
-                }`} />
-                <span className={`text-sm font-medium ${
-                  formData.priority === option.value ? option.color : 'text-text-primary'
-                }`}>
-                  {option.label}
-                </span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Category Field */}
-      <div>
-        <label className="block text-sm font-medium text-text-primary mb-2">
-          Category
-        </label>
-        <select
-          value={formData.category}
-          onChange={(e) => handleInputChange('category', e.target.value)}
-          className="w-full px-3 py-2 border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-micro bg-surface"
-        >
-          {categoryOptions.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
       </div>
 
       {/* Status Field */}

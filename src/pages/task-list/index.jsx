@@ -24,9 +24,7 @@ const TaskList = () => {
       title: "Complete project proposal",
       description: "Finalize the Q4 project proposal with budget estimates and timeline. Include stakeholder feedback and risk assessment.",
       dueDate: "2024-12-25",
-      priority: "high",
       status: "pending",
-      category: "work",
       createdAt: "2024-12-15T10:00:00Z"
     },
     {
@@ -34,9 +32,7 @@ const TaskList = () => {
       title: "Review team performance",
       description: "Conduct quarterly performance reviews for all team members and prepare feedback reports.",
       dueDate: "2024-12-20",
-      priority: "medium",
       status: "completed",
-      category: "work",
       createdAt: "2024-12-10T14:30:00Z"
     },
     {
@@ -44,9 +40,7 @@ const TaskList = () => {
       title: "Buy groceries",
       description: "Weekly grocery shopping - milk, bread, vegetables, fruits, and household essentials.",
       dueDate: "2024-12-18",
-      priority: "low",
       status: "overdue",
-      category: "personal",
       createdAt: "2024-12-12T09:15:00Z"
     },
     {
@@ -54,9 +48,7 @@ const TaskList = () => {
       title: "Schedule dentist appointment",
       description: "Book routine dental checkup and cleaning appointment for next month.",
       dueDate: "2024-12-30",
-      priority: "medium",
       status: "pending",
-      category: "health",
       createdAt: "2024-12-14T16:45:00Z"
     },
     {
@@ -64,9 +56,7 @@ const TaskList = () => {
       title: "Update portfolio website",
       description: "Add recent projects, update skills section, and optimize for mobile responsiveness.",
       dueDate: "2024-12-28",
-      priority: "high",
       status: "pending",
-      category: "personal",
       createdAt: "2024-12-13T11:20:00Z"
     },
     {
@@ -74,9 +64,7 @@ const TaskList = () => {
       title: "Prepare presentation slides",
       description: "Create slides for the upcoming client presentation including market analysis and recommendations.",
       dueDate: "2024-12-22",
-      priority: "high",
       status: "pending",
-      category: "work",
       createdAt: "2024-12-16T08:30:00Z"
     },
     {
@@ -84,9 +72,7 @@ const TaskList = () => {
       title: "Learn React hooks",
       description: "Complete online course on advanced React hooks and practice with sample projects.",
       dueDate: "2024-12-31",
-      priority: "medium",
       status: "pending",
-      category: "education",
       createdAt: "2024-12-11T13:00:00Z"
     },
     {
@@ -94,9 +80,7 @@ const TaskList = () => {
       title: "Plan weekend trip",
       description: "Research destinations, book accommodations, and create itinerary for weekend getaway.",
       dueDate: "2024-12-26",
-      priority: "low",
       status: "completed",
-      category: "personal",
       createdAt: "2024-12-09T15:45:00Z"
     }
   ];
@@ -114,8 +98,6 @@ const TaskList = () => {
   // Filter and sort state
   const [filters, setFilters] = useState({
     status: 'all',
-    priority: 'all',
-    category: 'all',
     dateFrom: '',
     dateTo: ''
   });
@@ -150,16 +132,6 @@ const TaskList = () => {
       }
     }
 
-    // Apply priority filter
-    if (filters.priority !== 'all') {
-      filtered = filtered.filter(task => task.priority === filters.priority);
-    }
-
-    // Apply category filter
-    if (filters.category !== 'all') {
-      filtered = filtered.filter(task => task.category === filters.category);
-    }
-
     // Apply date range filter
     if (filters.dateFrom) {
       filtered = filtered.filter(task => new Date(task.dueDate) >= new Date(filters.dateFrom));
@@ -176,12 +148,6 @@ const TaskList = () => {
       if (sortConfig.field === 'dueDate' || sortConfig.field === 'createdAt') {
         aValue = new Date(aValue);
         bValue = new Date(bValue);
-      }
-
-      if (sortConfig.field === 'priority') {
-        const priorityOrder = { high: 3, medium: 2, low: 1 };
-        aValue = priorityOrder[aValue];
-        bValue = priorityOrder[bValue];
       }
 
       if (aValue < bValue) {
@@ -212,8 +178,6 @@ const TaskList = () => {
   const handleResetFilters = () => {
     setFilters({
       status: 'all',
-      priority: 'all',
-      category: 'all',
       dateFrom: '',
       dateTo: ''
     });

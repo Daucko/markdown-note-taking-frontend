@@ -14,14 +14,15 @@ const UserProfile = () => {
   // Mock user data
   const [userData, setUserData] = useState({
     id: 1,
-    name: "Sarah Johnson",
-    email: "sarah.johnson@email.com",
-    phone: "+1 (555) 123-4567",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-    joinDate: "March 2022",
+    name: 'Sarah Johnson',
+    email: 'sarah.johnson@email.com',
+    phone: '+1 (555) 123-4567',
+    avatar:
+      'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
+    joinDate: 'March 2022',
     tasksCompleted: 127,
     activeTasks: 8,
-    completedTasks: 89
+    completedTasks: 89,
   });
 
   // Mock account settings
@@ -29,8 +30,8 @@ const UserProfile = () => {
     notifications: {
       taskReminders: true,
       weeklySummary: false,
-      teamUpdates: true
-    }
+      teamUpdates: true,
+    },
   });
 
   // Mock app preferences
@@ -38,13 +39,12 @@ const UserProfile = () => {
     theme: 'light',
     dateFormat: 'MM/DD/YYYY',
     timeFormat: '12',
-    defaultPriority: 'medium',
     language: 'en',
-    autoSave: true
+    autoSave: true,
   });
 
   const handleUserUpdate = (updatedData) => {
-    setUserData(prev => ({ ...prev, ...updatedData }));
+    setUserData((prev) => ({ ...prev, ...updatedData }));
   };
 
   const handleAccountSettingsUpdate = (updatedSettings) => {
@@ -111,7 +111,7 @@ const UserProfile = () => {
   return (
     <div className="min-h-screen bg-background">
       <ContextualHeader />
-      
+
       <div className="lg:ml-64">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           {/* Profile Header - Always visible */}
@@ -129,7 +129,7 @@ const UserProfile = () => {
                 { id: 'personal', label: 'Personal', icon: 'User' },
                 { id: 'account', label: 'Account', icon: 'Settings' },
                 { id: 'preferences', label: 'Preferences', icon: 'Palette' },
-                { id: 'data', label: 'Data', icon: 'Database' }
+                { id: 'data', label: 'Data', icon: 'Database' },
               ].map((section) => (
                 <button
                   key={section.id}
@@ -157,15 +157,13 @@ const UserProfile = () => {
             </div>
 
             {/* Main Content */}
-            <div className="lg:col-span-8">
-              {renderActiveSection()}
-            </div>
+            <div className="lg:col-span-8">{renderActiveSection()}</div>
           </div>
         </div>
       </div>
 
       <BottomTabNavigation />
-      
+
       {/* Bottom padding for mobile navigation */}
       <div className="h-16 lg:hidden" />
     </div>

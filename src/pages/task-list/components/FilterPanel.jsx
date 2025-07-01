@@ -3,26 +3,26 @@ import React from 'react';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 
-const FilterPanel = ({ 
-  isOpen, 
-  onClose, 
-  filters, 
-  onFilterChange, 
-  onApplyFilters, 
-  onResetFilters 
+const FilterPanel = ({
+  isOpen,
+  onClose,
+  filters,
+  onFilterChange,
+  onApplyFilters,
+  onResetFilters,
 }) => {
   const statusOptions = [
     { value: 'all', label: 'All Tasks' },
     { value: 'pending', label: 'Pending' },
     { value: 'completed', label: 'Completed' },
-    { value: 'overdue', label: 'Overdue' }
+    { value: 'overdue', label: 'Overdue' },
   ];
 
   const priorityOptions = [
     { value: 'all', label: 'All Priorities' },
     { value: 'high', label: 'High' },
     { value: 'medium', label: 'Medium' },
-    { value: 'low', label: 'Low' }
+    { value: 'low', label: 'Low' },
   ];
 
   const categoryOptions = [
@@ -31,7 +31,7 @@ const FilterPanel = ({
     { value: 'personal', label: 'Personal' },
     { value: 'shopping', label: 'Shopping' },
     { value: 'health', label: 'Health' },
-    { value: 'education', label: 'Education' }
+    { value: 'education', label: 'Education' },
   ];
 
   if (!isOpen) return null;
@@ -39,18 +39,20 @@ const FilterPanel = ({
   return (
     <>
       {/* Mobile Overlay */}
-      <div 
+      <div
         className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
         onClick={onClose}
       />
 
       {/* Filter Panel */}
-      <div className={`
+      <div
+        className={`
         lg:relative lg:bg-transparent lg:shadow-none lg:rounded-none lg:p-0
         fixed bottom-0 left-0 right-0 bg-surface rounded-t-xl shadow-elevation-3 z-50
         lg:block lg:w-full lg:h-auto
         ${isOpen ? 'block' : 'hidden'}
-      `}>
+      `}
+      >
         {/* Mobile Header */}
         <div className="lg:hidden flex items-center justify-between p-4 border-b border-border">
           <h3 className="text-lg font-heading font-semibold text-text-primary">
@@ -81,7 +83,10 @@ const FilterPanel = ({
             </label>
             <div className="space-y-2">
               {statusOptions.map((option) => (
-                <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
+                <label
+                  key={option.value}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     name="status"
@@ -90,7 +95,9 @@ const FilterPanel = ({
                     onChange={(e) => onFilterChange('status', e.target.value)}
                     className="w-4 h-4 text-primary border-border focus:ring-primary"
                   />
-                  <span className="text-sm text-text-secondary">{option.label}</span>
+                  <span className="text-sm text-text-secondary">
+                    {option.label}
+                  </span>
                 </label>
               ))}
             </div>
@@ -103,7 +110,10 @@ const FilterPanel = ({
             </label>
             <div className="space-y-2">
               {priorityOptions.map((option) => (
-                <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
+                <label
+                  key={option.value}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     name="priority"
@@ -112,7 +122,9 @@ const FilterPanel = ({
                     onChange={(e) => onFilterChange('priority', e.target.value)}
                     className="w-4 h-4 text-primary border-border focus:ring-primary"
                   />
-                  <span className="text-sm text-text-secondary">{option.label}</span>
+                  <span className="text-sm text-text-secondary">
+                    {option.label}
+                  </span>
                 </label>
               ))}
             </div>
@@ -125,7 +137,10 @@ const FilterPanel = ({
             </label>
             <div className="space-y-2">
               {categoryOptions.map((option) => (
-                <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
+                <label
+                  key={option.value}
+                  className="flex items-center space-x-2 cursor-pointer"
+                >
                   <input
                     type="radio"
                     name="category"
@@ -134,7 +149,9 @@ const FilterPanel = ({
                     onChange={(e) => onFilterChange('category', e.target.value)}
                     className="w-4 h-4 text-primary border-border focus:ring-primary"
                   />
-                  <span className="text-sm text-text-secondary">{option.label}</span>
+                  <span className="text-sm text-text-secondary">
+                    {option.label}
+                  </span>
                 </label>
               ))}
             </div>
@@ -147,7 +164,9 @@ const FilterPanel = ({
             </label>
             <div className="space-y-3">
               <div>
-                <label className="block text-xs text-text-secondary mb-1">From</label>
+                <label className="block text-xs text-text-secondary mb-1">
+                  From
+                </label>
                 <Input
                   type="date"
                   value={filters.dateFrom}
@@ -156,7 +175,9 @@ const FilterPanel = ({
                 />
               </div>
               <div>
-                <label className="block text-xs text-text-secondary mb-1">To</label>
+                <label className="block text-xs text-text-secondary mb-1">
+                  To
+                </label>
                 <Input
                   type="date"
                   value={filters.dateTo}

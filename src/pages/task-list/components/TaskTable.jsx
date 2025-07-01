@@ -13,18 +13,6 @@ const TaskTable = ({
   onSort,
   currentSort 
 }) => {
-  const getPriorityColor = (priority) => {
-    switch (priority.toLowerCase()) {
-      case 'high':
-        return 'text-red-600 bg-red-50';
-      case 'medium':
-        return 'text-yellow-600 bg-yellow-50';
-      case 'low':
-        return 'text-green-600 bg-green-50';
-      default:
-        return 'text-gray-600 bg-gray-50';
-    }
-  };
 
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
@@ -91,12 +79,8 @@ const TaskTable = ({
                 <span className="sr-only">Status</span>
               </th>
               <SortableHeader field="title">Task</SortableHeader>
-              <SortableHeader field="priority">Priority</SortableHeader>
               <SortableHeader field="dueDate">Due Date</SortableHeader>
               <SortableHeader field="status">Status</SortableHeader>
-              <th className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
-                Category
-              </th>
               <th className="px-6 py-3 w-24">
                 <span className="sr-only">Actions</span>
               </th>
@@ -155,14 +139,6 @@ const TaskTable = ({
                     </div>
                   </td>
 
-                  <td className="px-6 py-4">
-                    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                      getPriorityColor(task.priority)
-                    }`}>
-                      {task.priority}
-                    </span>
-                  </td>
-
                   <td className="px-6 py-4 text-sm text-text-primary">
                     <div className={isOverdue(task) ? 'text-error font-medium' : ''}>
                       {formatDate(task.dueDate)}
@@ -175,14 +151,6 @@ const TaskTable = ({
                     }`}>
                       {task.status}
                     </span>
-                  </td>
-
-                  <td className="px-6 py-4 text-sm text-text-secondary">
-                    {task.category && (
-                      <span className="px-2 py-1 bg-border-light rounded-full text-xs">
-                        {task.category}
-                      </span>
-                    )}
                   </td>
 
                   <td className="px-6 py-4">

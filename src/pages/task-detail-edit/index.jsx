@@ -30,70 +30,70 @@ const TaskDetailEdit = () => {
 
   const loadTaskData = async () => {
     setIsLoading(true);
-    
+
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       if (mode === 'edit') {
         // Mock task data
         const mockTask = {
           id: taskId || 1,
-          title: "Complete project documentation",
+          title: 'Complete project documentation',
           description: `Create comprehensive documentation for the new task management system.\n\nThis includes:\n- User guide\n- API documentation\n- Installation instructions\n- Troubleshooting guide`,
-          dueDate: "2024-12-25",
-          priority: "high",
-          category: "work",
-          status: "in-progress",
-          tags: ["documentation", "project", "urgent"],
-          createdAt: "2024-12-01T10:00:00Z",
-          updatedAt: "2024-12-15T14:30:00Z"
+          dueDate: '2024-12-25',
+          status: 'in-progress',
+          tags: ['documentation', 'project', 'urgent'],
+          createdAt: '2024-12-01T10:00:00Z',
+          updatedAt: '2024-12-15T14:30:00Z',
         };
-        
+
         setTask(mockTask);
-        
+
         // Mock attachments
         setAttachments([
           {
             id: 1,
-            name: "project-requirements.pdf",
+            name: 'project-requirements.pdf',
             size: 2048576,
-            type: "application/pdf",
-            url: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop",
-            uploadedAt: "2024-12-10T09:00:00Z"
+            type: 'application/pdf',
+            url: 'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=400&h=300&fit=crop',
+            uploadedAt: '2024-12-10T09:00:00Z',
           },
           {
             id: 2,
-            name: "wireframes.png",
+            name: 'wireframes.png',
             size: 1024000,
-            type: "image/png",
-            url: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=300&fit=crop",
-            uploadedAt: "2024-12-12T15:30:00Z"
-          }
+            type: 'image/png',
+            url: 'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=400&h=300&fit=crop',
+            uploadedAt: '2024-12-12T15:30:00Z',
+          },
         ]);
-        
+
         // Mock comments
         setComments([
           {
             id: 1,
-            text: "Started working on the user guide section. Should have the first draft ready by tomorrow.",
+            text: 'Started working on the user guide section. Should have the first draft ready by tomorrow.',
             author: {
-              name: "John Doe",
-              avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+              name: 'John Doe',
+              avatar:
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face',
             },
-            createdAt: "2024-12-14T10:30:00Z",
-            isOwn: true
+            createdAt: '2024-12-14T10:30:00Z',
+            isOwn: true,
           },
           {
             id: 2,
-            text: "Great progress! Make sure to include screenshots in the user guide for better clarity.",
+            text: 'Great progress! Make sure to include screenshots in the user guide for better clarity.',
             author: {
-              name: "Jane Smith",
-              avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
+              name: 'Jane Smith',
+              avatar:
+                'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face',
             },
-            createdAt: "2024-12-14T16:45:00Z",
-            isOwn: false
-          }
+            createdAt: '2024-12-14T16:45:00Z',
+            isOwn: false,
+          },
         ]);
       }
     } catch (error) {
@@ -106,20 +106,20 @@ const TaskDetailEdit = () => {
   const handleSaveTask = async (formData) => {
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
       if (mode === 'create') {
         console.log('Creating new task:', formData);
         // Navigate back to task list after creation
-        navigate('/task-list', { 
-          state: { 
+        navigate('/task-list', {
+          state: {
             message: 'Task created successfully!',
-            type: 'success'
-          }
+            type: 'success',
+          },
         });
       } else {
         console.log('Updating task:', formData);
-        setTask(prev => ({ ...prev, ...formData }));
+        setTask((prev) => ({ ...prev, ...formData }));
         setHasUnsavedChanges(false);
         // Show success message
         alert('Task updated successfully!');
@@ -132,7 +132,11 @@ const TaskDetailEdit = () => {
 
   const handleCancel = () => {
     if (hasUnsavedChanges) {
-      if (window.confirm('You have unsaved changes. Are you sure you want to leave?')) {
+      if (
+        window.confirm(
+          'You have unsaved changes. Are you sure you want to leave?'
+        )
+      ) {
         navigate(-1);
       }
     } else {
@@ -141,34 +145,38 @@ const TaskDetailEdit = () => {
   };
 
   const handleAddAttachment = (attachment) => {
-    setAttachments(prev => [...prev, attachment]);
+    setAttachments((prev) => [...prev, attachment]);
     setHasUnsavedChanges(true);
   };
 
   const handleRemoveAttachment = (attachmentId) => {
-    setAttachments(prev => prev.filter(att => att.id !== attachmentId));
+    setAttachments((prev) => prev.filter((att) => att.id !== attachmentId));
     setHasUnsavedChanges(true);
   };
 
   const handleAddComment = (comment) => {
-    setComments(prev => [comment, ...prev]);
+    setComments((prev) => [comment, ...prev]);
   };
 
   const handleDeleteComment = (commentId) => {
     if (window.confirm('Are you sure you want to delete this comment?')) {
-      setComments(prev => prev.filter(comment => comment.id !== commentId));
+      setComments((prev) => prev.filter((comment) => comment.id !== commentId));
     }
   };
 
   const handleDeleteTask = () => {
-    if (window.confirm('Are you sure you want to delete this task? This action cannot be undone.')) {
+    if (
+      window.confirm(
+        'Are you sure you want to delete this task? This action cannot be undone.'
+      )
+    ) {
       // Simulate API call
       console.log('Deleting task:', task.id);
       navigate('/task-list', {
         state: {
           message: 'Task deleted successfully!',
-          type: 'success'
-        }
+          type: 'success',
+        },
       });
     }
   };
@@ -177,16 +185,26 @@ const TaskDetailEdit = () => {
     navigate('/task-detail-edit', {
       state: {
         mode: 'create',
-        duplicateFrom: task
-      }
+        duplicateFrom: task,
+      },
     });
   };
 
   const tabs = [
     { id: 'details', label: 'Details', icon: 'FileText' },
-    { id: 'attachments', label: 'Files', icon: 'Paperclip', badge: attachments.length },
-    { id: 'comments', label: 'Comments', icon: 'MessageCircle', badge: comments.length },
-    { id: 'activity', label: 'Activity', icon: 'Activity' }
+    {
+      id: 'attachments',
+      label: 'Files',
+      icon: 'Paperclip',
+      badge: attachments.length,
+    },
+    {
+      id: 'comments',
+      label: 'Comments',
+      icon: 'MessageCircle',
+      badge: comments.length,
+    },
+    { id: 'activity', label: 'Activity', icon: 'Activity' },
   ];
 
   if (isLoading) {
@@ -195,7 +213,11 @@ const TaskDetailEdit = () => {
         <ContextualHeader />
         <div className="flex items-center justify-center h-96">
           <div className="text-center">
-            <Icon name="Loader2" size={32} className="animate-spin mx-auto mb-4 text-primary" />
+            <Icon
+              name="Loader2"
+              size={32}
+              className="animate-spin mx-auto mb-4 text-primary"
+            />
             <p className="text-text-secondary">Loading task...</p>
           </div>
         </div>
@@ -206,19 +228,25 @@ const TaskDetailEdit = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <ContextualHeader 
-        title={mode === 'create' ? 'Create Task' : task?.title || 'Task Details'}
+      <ContextualHeader
+        title={
+          mode === 'create' ? 'Create Task' : task?.title || 'Task Details'
+        }
         showBack={true}
-        actions={mode === 'edit' ? [
-          {
-            icon: 'Copy',
-            onClick: handleDuplicateTask
-          },
-          {
-            icon: 'Trash2',
-            onClick: handleDeleteTask
-          }
-        ] : []}
+        actions={
+          mode === 'edit'
+            ? [
+                {
+                  icon: 'Copy',
+                  onClick: handleDuplicateTask,
+                },
+                {
+                  icon: 'Trash2',
+                  onClick: handleDeleteTask,
+                },
+              ]
+            : []
+        }
       />
 
       <div className="lg:ml-64">
@@ -254,7 +282,11 @@ const TaskDetailEdit = () => {
               {/* Content Sections */}
               <div className="space-y-8">
                 {/* Task Form - Always visible on desktop, tab-controlled on mobile */}
-                <div className={`${activeTab !== 'details' ? 'hidden lg:block' : ''}`}>
+                <div
+                  className={`${
+                    activeTab !== 'details' ? 'hidden lg:block' : ''
+                  }`}
+                >
                   <div className="bg-surface rounded-lg border border-border p-6 shadow-elevation-1">
                     <TaskForm
                       task={task}
@@ -266,7 +298,11 @@ const TaskDetailEdit = () => {
                 </div>
 
                 {/* Attachments Section */}
-                <div className={`${activeTab !== 'attachments' ? 'hidden lg:block' : ''}`}>
+                <div
+                  className={`${
+                    activeTab !== 'attachments' ? 'hidden lg:block' : ''
+                  }`}
+                >
                   <div className="bg-surface rounded-lg border border-border p-6 shadow-elevation-1">
                     <AttachmentSection
                       attachments={attachments}
@@ -277,7 +313,11 @@ const TaskDetailEdit = () => {
                 </div>
 
                 {/* Comments Section */}
-                <div className={`${activeTab !== 'comments' ? 'hidden lg:block' : ''}`}>
+                <div
+                  className={`${
+                    activeTab !== 'comments' ? 'hidden lg:block' : ''
+                  }`}
+                >
                   <div className="bg-surface rounded-lg border border-border p-6 shadow-elevation-1">
                     <CommentsSection
                       comments={comments}
@@ -288,7 +328,11 @@ const TaskDetailEdit = () => {
                 </div>
 
                 {/* Activity Section */}
-                <div className={`${activeTab !== 'activity' ? 'hidden lg:block' : ''}`}>
+                <div
+                  className={`${
+                    activeTab !== 'activity' ? 'hidden lg:block' : ''
+                  }`}
+                >
                   <div className="bg-surface rounded-lg border border-border p-6 shadow-elevation-1">
                     <ActivityHistory />
                   </div>
@@ -309,7 +353,9 @@ const TaskDetailEdit = () => {
                 {/* Quick Actions */}
                 {mode === 'edit' && (
                   <div className="bg-surface rounded-lg border border-border p-6 shadow-elevation-1">
-                    <h3 className="text-lg font-medium text-text-primary mb-4">Quick Actions</h3>
+                    <h3 className="text-lg font-medium text-text-primary mb-4">
+                      Quick Actions
+                    </h3>
                     <div className="space-y-3">
                       <Button
                         variant="outline"
@@ -353,7 +399,7 @@ const TaskDetailEdit = () => {
       </div>
 
       <BottomTabNavigation />
-      
+
       {/* Mobile spacing for bottom navigation */}
       <div className="h-16 lg:hidden" />
     </div>

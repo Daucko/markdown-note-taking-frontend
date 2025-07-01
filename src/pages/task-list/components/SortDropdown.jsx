@@ -8,7 +8,6 @@ const SortDropdown = ({ currentSort, onSortChange }) => {
 
   const sortOptions = [
     { value: 'dueDate', label: 'Due Date', icon: 'Calendar' },
-    { value: 'priority', label: 'Priority', icon: 'AlertTriangle' },
     { value: 'createdAt', label: 'Created Date', icon: 'Clock' },
     { value: 'title', label: 'Alphabetical', icon: 'AlphabeticalSort' },
     { value: 'status', label: 'Status', icon: 'CheckCircle' }

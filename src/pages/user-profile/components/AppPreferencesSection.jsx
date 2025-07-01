@@ -27,12 +27,6 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
     { value: '24', label: '24-hour' }
   ];
 
-  const priorityOptions = [
-    { value: 'low', label: 'Low', color: 'text-blue-600' },
-    { value: 'medium', label: 'Medium', color: 'text-amber-600' },
-    { value: 'high', label: 'High', color: 'text-red-600' }
-  ];
-
   return (
     <div className="bg-surface border border-border rounded-lg shadow-elevation-1">
       <div className="flex items-center space-x-3 p-6 border-b border-border">
@@ -109,35 +103,6 @@ const AppPreferencesSection = ({ preferences, onUpdate }) => {
                 />
                 <span className="text-sm text-text-primary">{format.label}</span>
               </label>
-            ))}
-          </div>
-        </div>
-
-        {/* Default Task Priority */}
-        <div>
-          <h3 className="text-md font-medium text-text-primary mb-4">Default Task Priority</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {priorityOptions.map((priority) => (
-              <button
-                key={priority.value}
-                onClick={() => handlePreferenceChange('defaultPriority', priority.value)}
-                className={`p-3 rounded-lg border-2 transition-micro hover-lift ${
-                  preferences.defaultPriority === priority.value
-                    ? 'border-primary bg-blue-50' :'border-border bg-background hover:border-border-light'
-                }`}
-              >
-                <div className="flex items-center justify-center space-x-2">
-                  <div className={`w-3 h-3 rounded-full ${
-                    priority.value === 'low' ? 'bg-blue-500' :
-                    priority.value === 'medium' ? 'bg-amber-500' : 'bg-red-500'
-                  }`} />
-                  <span className={`text-sm font-medium ${
-                    preferences.defaultPriority === priority.value ? 'text-primary' : 'text-text-primary'
-                  }`}>
-                    {priority.label}
-                  </span>
-                </div>
-              </button>
             ))}
           </div>
         </div>

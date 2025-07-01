@@ -18,9 +18,9 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
 
   const handleTagSelect = (tagId, isMultiSelect = false) => {
     if (isMultiSelect) {
-      setSelectedTags(prev =>
+      setSelectedTags((prev) =>
         prev.includes(tagId)
-          ? prev.filter(id => id !== tagId)
+          ? prev.filter((id) => id !== tagId)
           : [...prev, tagId]
       );
     } else {
@@ -75,7 +75,7 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
     if (editingTag) {
       onAction?.('delete', editingTag?.id);
     } else if (selectedTags?.length > 0) {
-      selectedTags?.forEach(tagId => {
+      selectedTags?.forEach((tagId) => {
         onAction?.('delete', tagId);
       });
       setSelectedTags([]);
@@ -91,10 +91,12 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
   };
 
   const getTagFrequencyData = () => {
-    return tags?.map(tag => ({
-      ...tag,
-      size: Math.max(12, Math.min(32, 12 + (tag?.usageCount || 0) * 2))
-    })) || [];
+    return (
+      tags?.map((tag) => ({
+        ...tag,
+        size: Math.max(12, Math.min(32, 12 + (tag?.usageCount || 0) * 2)),
+      })) || []
+    );
   };
 
   const formatDate = (dateString) => {
@@ -108,13 +110,15 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
   if (tags?.length === 0 && searchQuery) {
     return (
       <div className="text-center py-12">
-        <Icon name="Search" size={48} className="mx-auto text-text-secondary mb-4" />
+        <Icon
+          name="Search"
+          size={48}
+          className="mx-auto text-text-secondary mb-4"
+        />
         <h3 className="text-lg font-medium text-text-primary mb-2">
           No tags found
         </h3>
-        <p className="text-text-secondary">
-          Try adjusting your search terms
-        </p>
+        <p className="text-text-secondary">Try adjusting your search terms</p>
       </div>
     );
   }
@@ -122,18 +126,18 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
   if (tags?.length === 0) {
     return (
       <div className="text-center py-12">
-        <Icon name="Tag" size={48} className="mx-auto text-text-secondary mb-4" />
+        <Icon
+          name="Tag"
+          size={48}
+          className="mx-auto text-text-secondary mb-4"
+        />
         <h3 className="text-lg font-medium text-text-primary mb-2">
           No tags yet
         </h3>
         <p className="text-text-secondary mb-6">
           Create your first tag to categorize your notes
         </p>
-        <Button
-          variant="primary"
-          iconName="Plus"
-          onClick={handleCreateTag}
-        >
+        <Button variant="primary" iconName="Plus" onClick={handleCreateTag}>
           Create Tag
         </Button>
       </div>
@@ -146,13 +150,17 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <div className="text-sm text-text-secondary">
-            {tags?.length} tags • {tags?.reduce((acc, tag) => acc + (tag?.usageCount || 0), 0)} total usages
+            {tags?.length} tags •{' '}
+            {tags?.reduce((acc, tag) => acc + (tag?.usageCount || 0), 0)} total
+            usages
           </div>
           <div className="flex items-center bg-background rounded-lg p-1">
             <button
               onClick={() => setViewMode('cloud')}
               className={`px-3 py-1 text-xs rounded transition-colors ${
-                viewMode === 'cloud' ?'bg-surface text-text-primary shadow-sm' :'text-text-secondary hover:text-text-primary'
+                viewMode === 'cloud'
+                  ? 'bg-surface text-text-primary shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               Cloud
@@ -160,7 +168,9 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
             <button
               onClick={() => setViewMode('list')}
               className={`px-3 py-1 text-xs rounded transition-colors ${
-                viewMode === 'list' ?'bg-surface text-text-primary shadow-sm' :'text-text-secondary hover:text-text-primary'
+                viewMode === 'list'
+                  ? 'bg-surface text-text-primary shadow-sm'
+                  : 'text-text-secondary hover:text-text-primary'
               }`}
             >
               List
@@ -226,7 +236,8 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
                 onClick={() => handleTagSelect(tag?.id, true)}
                 className={`flex items-center justify-between p-3 rounded-lg border cursor-pointer transition-all ${
                   selectedTags?.includes(tag?.id)
-                    ? 'border-primary bg-primary-light' :'border-border hover:border-primary-light hover:bg-background'
+                    ? 'border-primary bg-primary-light'
+                    : 'border-border hover:border-primary-light hover:bg-background'
                 }`}
               >
                 <div className="flex items-center space-x-3">
@@ -309,7 +320,7 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
       {/* Delete Confirmation Dialog */}
       {showDeleteDialog && (
         <ConfirmDialog
-          title={editingTag ? "Delete Tag" : "Delete Tags"}
+          title={editingTag ? 'Delete Tag' : 'Delete Tags'}
           message={
             editingTag
               ? `Are you sure you want to delete the tag "${editingTag?.name}"? This will remove it from ${editingTag?.usageCount} notes.`
@@ -328,7 +339,7 @@ const TagManagement = ({ tags, onAction, searchQuery }) => {
       {/* Merge Tags Dialog */}
       {showMergeDialog && (
         <MergeTagsDialog
-          tags={tags?.filter(tag => selectedTags?.includes(tag?.id))}
+          tags={tags?.filter((tag) => selectedTags?.includes(tag?.id))}
           onConfirm={confirmMergeTags}
           onCancel={() => setShowMergeDialog(false)}
         />
