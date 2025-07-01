@@ -12,29 +12,29 @@ const UpcomingTasks = () => {
       title: 'Client presentation preparation',
       dueDate: '2024-12-20',
       tag: 'Work',
-      progress: 75
+      progress: 75,
     },
     {
       id: 2,
       title: 'Website deployment checklist',
       dueDate: '2024-12-21',
       tag: 'Development',
-      progress: 40
+      progress: 40,
     },
     {
       id: 3,
       title: 'Team meeting agenda',
       dueDate: '2024-12-22',
       tag: 'Management',
-      progress: 20
+      progress: 20,
     },
     {
       id: 4,
       title: 'Database backup verification',
       dueDate: '2024-12-23',
       tag: 'Maintenance',
-      progress: 0
-    }
+      progress: 0,
+    },
   ];
 
   const formatDate = (dateString) => {
@@ -73,7 +73,7 @@ const UpcomingTasks = () => {
           View All
         </Button>
       </div>
-      
+
       <div className="space-y-4">
         {upcomingTasks.map((task) => (
           <div
@@ -90,7 +90,7 @@ const UpcomingTasks = () => {
                 {task.tag}
               </span>
             </div>
-            
+
             <div className="flex items-center justify-between text-xs text-text-secondary mb-3">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center space-x-1">
@@ -104,7 +104,7 @@ const UpcomingTasks = () => {
               </div>
               <span>{task.progress}%</span>
             </div>
-            
+
             <div className="w-full bg-gray-200 rounded-full h-1.5">
               <div
                 className="bg-primary h-1.5 rounded-full transition-all duration-300"
