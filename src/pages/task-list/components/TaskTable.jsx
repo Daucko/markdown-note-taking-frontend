@@ -2,18 +2,17 @@ import React from 'react';
 import Icon from '../../../components/AppIcon';
 import Button from '../../../components/ui/Button';
 
-const TaskTable = ({ 
-  tasks, 
-  onToggleComplete, 
-  onEdit, 
-  onDelete, 
-  selectedTasks, 
-  onSelectTask, 
+const TaskTable = ({
+  tasks,
+  onToggleComplete,
+  onEdit,
+  onDelete,
+  selectedTasks,
+  onSelectTask,
   isBulkMode,
   onSort,
-  currentSort 
+  currentSort,
 }) => {
-
   const getStatusColor = (status) => {
     switch (status.toLowerCase()) {
       case 'completed':
@@ -32,7 +31,7 @@ const TaskTable = ({
     return date.toLocaleDateString('en-US', {
       month: 'short',
       day: 'numeric',
-      year: 'numeric'
+      year: 'numeric',
     });
   };
 
@@ -43,21 +42,24 @@ const TaskTable = ({
   };
 
   const handleSort = (field) => {
-    const direction = currentSort.field === field && currentSort.direction === 'asc' ? 'desc' : 'asc';
+    const direction =
+      currentSort.field === field && currentSort.direction === 'asc'
+        ? 'desc'
+        : 'asc';
     onSort({ field, direction });
   };
 
   const SortableHeader = ({ field, children }) => (
-    <th 
+    <th
       className="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-border-light transition-micro"
       onClick={() => handleSort(field)}
     >
       <div className="flex items-center space-x-1">
         <span>{children}</span>
         {currentSort.field === field && (
-          <Icon 
-            name={currentSort.direction === 'asc' ? 'ChevronUp' : 'ChevronDown'} 
-            size={14} 
+          <Icon
+            name={currentSort.direction === 'asc' ? 'ChevronUp' : 'ChevronDown'}
+            size={14}
           />
         )}
       </div>
@@ -90,8 +92,8 @@ const TaskTable = ({
             {tasks.map((task) => {
               const isSelected = selectedTasks.includes(task.id);
               return (
-                <tr 
-                  key={task.id} 
+                <tr
+                  key={task.id}
                   className={`hover:bg-border-light transition-micro ${
                     isSelected ? 'bg-primary/5 border-primary' : ''
                   }`}
@@ -102,33 +104,47 @@ const TaskTable = ({
                         onClick={() => onSelectTask(task.id)}
                         className="p-1 rounded hover:bg-border-light transition-micro"
                       >
-                        <Icon 
-                          name={isSelected ? "CheckSquare" : "Square"} 
-                          size={18} 
-                          className={isSelected ? "text-primary" : "text-text-secondary"}
+                        <Icon
+                          name={isSelected ? 'CheckSquare' : 'Square'}
+                          size={18}
+                          className={
+                            isSelected ? 'text-primary' : 'text-text-secondary'
+                          }
                         />
                       </button>
                     </td>
                   )}
-                  
+
                   <td className="px-6 py-4">
                     <button
                       onClick={() => onToggleComplete(task.id)}
                       className="p-1 rounded hover:bg-border-light transition-micro"
                     >
-                      <Icon 
-                        name={task.status === 'completed' ? "CheckCircle2" : "Circle"} 
-                        size={18} 
-                        className={task.status === 'completed' ? "text-success" : "text-text-secondary"}
+                      <Icon
+                        name={
+                          task.status === 'completed'
+                            ? 'CheckCircle2'
+                            : 'Circle'
+                        }
+                        size={18}
+                        className={
+                          task.status === 'completed'
+                            ? 'text-success'
+                            : 'text-text-secondary'
+                        }
                       />
                     </button>
                   </td>
 
                   <td className="px-6 py-4">
                     <div className="max-w-xs">
-                      <div className={`font-medium text-text-primary ${
-                        task.status === 'completed' ? 'line-through opacity-60' : ''
-                      }`}>
+                      <div
+                        className={`font-medium text-text-primary ${
+                          task.status === 'completed'
+                            ? 'line-through opacity-60'
+                            : ''
+                        }`}
+                      >
                         {task.title}
                       </div>
                       {task.description && (
@@ -140,15 +156,21 @@ const TaskTable = ({
                   </td>
 
                   <td className="px-6 py-4 text-sm text-text-primary">
-                    <div className={isOverdue(task) ? 'text-error font-medium' : ''}>
+                    <div
+                      className={
+                        isOverdue(task) ? 'text-error font-medium' : ''
+                      }
+                    >
                       {formatDate(task.dueDate)}
                     </div>
                   </td>
 
                   <td className="px-6 py-4">
-                    <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize ${
-                      getStatusColor(task.status)
-                    }`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-medium rounded-full capitalize ${getStatusColor(
+                        task.status
+                      )}`}
+                    >
                       {task.status}
                     </span>
                   </td>
