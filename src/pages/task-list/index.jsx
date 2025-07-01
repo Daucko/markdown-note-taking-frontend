@@ -13,7 +13,6 @@ import EmptyState from './components/EmptyState';
 import PullToRefresh from './components/PullToRefresh';
 import Button from '../../components/ui/Button';
 
-
 const TaskList = () => {
   const navigate = useNavigate();
 
@@ -21,68 +20,76 @@ const TaskList = () => {
   const mockTasks = [
     {
       id: 1,
-      title: "Complete project proposal",
-      description: "Finalize the Q4 project proposal with budget estimates and timeline. Include stakeholder feedback and risk assessment.",
-      dueDate: "2024-12-25",
-      status: "pending",
-      createdAt: "2024-12-15T10:00:00Z"
+      title: 'Complete project proposal',
+      description:
+        'Finalize the Q4 project proposal with budget estimates and timeline. Include stakeholder feedback and risk assessment.',
+      dueDate: '2024-12-25',
+      status: 'pending',
+      createdAt: '2024-12-15T10:00:00Z',
     },
     {
       id: 2,
-      title: "Review team performance",
-      description: "Conduct quarterly performance reviews for all team members and prepare feedback reports.",
-      dueDate: "2024-12-20",
-      status: "completed",
-      createdAt: "2024-12-10T14:30:00Z"
+      title: 'Review team performance',
+      description:
+        'Conduct quarterly performance reviews for all team members and prepare feedback reports.',
+      dueDate: '2024-12-20',
+      status: 'completed',
+      createdAt: '2024-12-10T14:30:00Z',
     },
     {
       id: 3,
-      title: "Buy groceries",
-      description: "Weekly grocery shopping - milk, bread, vegetables, fruits, and household essentials.",
-      dueDate: "2024-12-18",
-      status: "overdue",
-      createdAt: "2024-12-12T09:15:00Z"
+      title: 'Buy groceries',
+      description:
+        'Weekly grocery shopping - milk, bread, vegetables, fruits, and household essentials.',
+      dueDate: '2024-12-18',
+      status: 'overdue',
+      createdAt: '2024-12-12T09:15:00Z',
     },
     {
       id: 4,
-      title: "Schedule dentist appointment",
-      description: "Book routine dental checkup and cleaning appointment for next month.",
-      dueDate: "2024-12-30",
-      status: "pending",
-      createdAt: "2024-12-14T16:45:00Z"
+      title: 'Schedule dentist appointment',
+      description:
+        'Book routine dental checkup and cleaning appointment for next month.',
+      dueDate: '2024-12-30',
+      status: 'pending',
+      createdAt: '2024-12-14T16:45:00Z',
     },
     {
       id: 5,
-      title: "Update portfolio website",
-      description: "Add recent projects, update skills section, and optimize for mobile responsiveness.",
-      dueDate: "2024-12-28",
-      status: "pending",
-      createdAt: "2024-12-13T11:20:00Z"
+      title: 'Update portfolio website',
+      description:
+        'Add recent projects, update skills section, and optimize for mobile responsiveness.',
+      dueDate: '2024-12-28',
+      status: 'pending',
+      createdAt: '2024-12-13T11:20:00Z',
     },
     {
       id: 6,
-      title: "Prepare presentation slides",
-      description: "Create slides for the upcoming client presentation including market analysis and recommendations.",
-      dueDate: "2024-12-22",
-      status: "pending",
-      createdAt: "2024-12-16T08:30:00Z"
+      title: 'Prepare presentation slides',
+      description:
+        'Create slides for the upcoming client presentation including market analysis and recommendations.',
+      dueDate: '2024-12-22',
+      status: 'pending',
+      createdAt: '2024-12-16T08:30:00Z',
     },
     {
       id: 7,
-      title: "Learn React hooks",
-      description: "Complete online course on advanced React hooks and practice with sample projects.",
-      dueDate: "2024-12-31",
-      status: "pending",
-      createdAt: "2024-12-11T13:00:00Z"
+      title: 'Learn React hooks',
+      description:
+        'Complete online course on advanced React hooks and practice with sample projects.',
+      dueDate: '2024-12-31',
+      status: 'pending',
+      createdAt: '2024-12-11T13:00:00Z',
     },
     {
       id: 8,
-      title: "Plan weekend trip",
-      description: "Research destinations, book accommodations, and create itinerary for weekend getaway.",
-      dueDate: "2024-12-26",
-      status: "completed",
-      createdAt: "2024-12-09T15:45:00Z"
-    }
+      title: 'Plan weekend trip',
+      description:
+        'Research destinations, book accommodations, and create itinerary for weekend getaway.',
+      dueDate: '2024-12-26',
+      status: 'completed',
+      createdAt: '2024-12-09T15:45:00Z',
+    },
   ];
 
   // State management
@@ -99,12 +106,12 @@ const TaskList = () => {
   const [filters, setFilters] = useState({
     status: 'all',
     dateFrom: '',
-    dateTo: ''
+    dateTo: '',
   });
 
   const [sortConfig, setSortConfig] = useState({
     field: 'dueDate',
-    direction: 'asc'
+    direction: 'asc',
   });
 
   // Apply filters and search
@@ -113,31 +120,36 @@ const TaskList = () => {
 
     // Apply search filter
     if (searchTerm) {
-      filtered = filtered.filter(task =>
-        task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        task.description.toLowerCase().includes(searchTerm.toLowerCase())
+      filtered = filtered.filter(
+        (task) =>
+          task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          task.description.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
     // Apply status filter
     if (filters.status !== 'all') {
       if (filters.status === 'overdue') {
-        filtered = filtered.filter(task => {
+        filtered = filtered.filter((task) => {
           const today = new Date();
           const dueDate = new Date(task.dueDate);
           return dueDate < today && task.status !== 'completed';
         });
       } else {
-        filtered = filtered.filter(task => task.status === filters.status);
+        filtered = filtered.filter((task) => task.status === filters.status);
       }
     }
 
     // Apply date range filter
     if (filters.dateFrom) {
-      filtered = filtered.filter(task => new Date(task.dueDate) >= new Date(filters.dateFrom));
+      filtered = filtered.filter(
+        (task) => new Date(task.dueDate) >= new Date(filters.dateFrom)
+      );
     }
     if (filters.dateTo) {
-      filtered = filtered.filter(task => new Date(task.dueDate) <= new Date(filters.dateTo));
+      filtered = filtered.filter(
+        (task) => new Date(task.dueDate) <= new Date(filters.dateTo)
+      );
     }
 
     // Apply sorting
@@ -168,7 +180,7 @@ const TaskList = () => {
   }, []);
 
   const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleApplyFilters = () => {
@@ -179,7 +191,7 @@ const TaskList = () => {
     setFilters({
       status: 'all',
       dateFrom: '',
-      dateTo: ''
+      dateTo: '',
     });
     setSearchTerm('');
   };
@@ -189,11 +201,16 @@ const TaskList = () => {
   };
 
   const handleToggleComplete = (taskId) => {
-    setTasks(prev => prev.map(task =>
-      task.id === taskId
-        ? { ...task, status: task.status === 'completed' ? 'pending' : 'completed' }
-        : task
-    ));
+    setTasks((prev) =>
+      prev.map((task) =>
+        task.id === taskId
+          ? {
+              ...task,
+              status: task.status === 'completed' ? 'pending' : 'completed',
+            }
+          : task
+      )
+    );
   };
 
   const handleEditTask = (task) => {
@@ -202,8 +219,8 @@ const TaskList = () => {
 
   const handleDeleteTask = (taskId) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
-      setTasks(prev => prev.filter(task => task.id !== taskId));
-      setSelectedTasks(prev => prev.filter(id => id !== taskId));
+      setTasks((prev) => prev.filter((task) => task.id !== taskId));
+      setSelectedTasks((prev) => prev.filter((id) => id !== taskId));
     }
   };
 
@@ -218,9 +235,9 @@ const TaskList = () => {
   };
 
   const handleSelectTask = (taskId) => {
-    setSelectedTasks(prev =>
+    setSelectedTasks((prev) =>
       prev.includes(taskId)
-        ? prev.filter(id => id !== taskId)
+        ? prev.filter((id) => id !== taskId)
         : [...prev, taskId]
     );
   };
@@ -229,33 +246,41 @@ const TaskList = () => {
     if (selectedTasks.length === filteredTasks.length) {
       setSelectedTasks([]);
     } else {
-      setSelectedTasks(filteredTasks.map(task => task.id));
+      setSelectedTasks(filteredTasks.map((task) => task.id));
     }
   };
 
   const handleBulkMarkComplete = () => {
-    setTasks(prev => prev.map(task =>
-      selectedTasks.includes(task.id)
-        ? { ...task, status: 'completed' }
-        : task
-    ));
+    setTasks((prev) =>
+      prev.map((task) =>
+        selectedTasks.includes(task.id)
+          ? { ...task, status: 'completed' }
+          : task
+      )
+    );
     setSelectedTasks([]);
     setIsBulkMode(false);
   };
 
   const handleBulkMarkIncomplete = () => {
-    setTasks(prev => prev.map(task =>
-      selectedTasks.includes(task.id)
-        ? { ...task, status: 'pending' }
-        : task
-    ));
+    setTasks((prev) =>
+      prev.map((task) =>
+        selectedTasks.includes(task.id) ? { ...task, status: 'pending' } : task
+      )
+    );
     setSelectedTasks([]);
     setIsBulkMode(false);
   };
 
   const handleBulkDelete = () => {
-    if (window.confirm(`Are you sure you want to delete ${selectedTasks.length} task(s)?`)) {
-      setTasks(prev => prev.filter(task => !selectedTasks.includes(task.id)));
+    if (
+      window.confirm(
+        `Are you sure you want to delete ${selectedTasks.length} task(s)?`
+      )
+    ) {
+      setTasks((prev) =>
+        prev.filter((task) => !selectedTasks.includes(task.id))
+      );
       setSelectedTasks([]);
       setIsBulkMode(false);
     }
@@ -269,21 +294,22 @@ const TaskList = () => {
   const handleRefresh = async () => {
     setIsLoading(true);
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     setIsLoading(false);
   };
 
   const getEmptyStateType = () => {
     if (tasks.length === 0) return 'no-tasks';
     if (filteredTasks.length === 0) return 'no-results';
-    if (filteredTasks.every(task => task.status === 'completed')) return 'all-completed';
+    if (filteredTasks.every((task) => task.status === 'completed'))
+      return 'all-completed';
     return 'no-tasks';
   };
 
   return (
     <div className="min-h-screen bg-background">
       <ContextualHeader />
-      
+
       {isBulkMode && (
         <BulkActionBar
           selectedCount={selectedTasks.length}
@@ -318,7 +344,7 @@ const TaskList = () => {
             <div className="flex items-center justify-between space-x-4">
               <div className="flex items-center space-x-4 flex-1">
                 <SearchBar onSearch={handleSearch} />
-                
+
                 <Button
                   variant="outline"
                   iconName="Filter"
@@ -374,10 +400,17 @@ const TaskList = () => {
                         <div
                           key={task.id}
                           onTouchStart={() => {
-                            const timer = setTimeout(() => handleLongPress(task.id), 500);
+                            const timer = setTimeout(
+                              () => handleLongPress(task.id),
+                              500
+                            );
                             const cleanup = () => clearTimeout(timer);
-                            document.addEventListener('touchend', cleanup, { once: true });
-                            document.addEventListener('touchmove', cleanup, { once: true });
+                            document.addEventListener('touchend', cleanup, {
+                              once: true,
+                            });
+                            document.addEventListener('touchmove', cleanup, {
+                              once: true,
+                            });
                           }}
                         >
                           <TaskCard
